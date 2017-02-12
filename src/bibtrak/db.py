@@ -64,3 +64,18 @@ def link(database, id, filename):
         """, (id, "file", filename))
 
         conn.commit()
+
+
+def find_file(database, field, query):
+    with sqlite3.connect(database) as conn:
+        c = conn.cursor()
+
+        result = c.execute("""
+            SELECT id FROM database
+            WHERE key=? and val LIKE ?
+        """, (field, query))
+
+        for r in result:
+            print(r)
+
+        conn.commit()
