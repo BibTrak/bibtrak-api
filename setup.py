@@ -1,4 +1,4 @@
-"""Coalescence Distribution Estimator (cde)
+"""bibtrak
 
 Long description goes here...
 """
