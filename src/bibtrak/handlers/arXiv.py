@@ -1,10 +1,10 @@
-from urllib2 import Request, urlopen, URLError
+from urllib.request import Request, urlopen, URLError
 import xml.etree.ElementTree
 
 from bibtrak import handler
 
 class arXiv(handler.Handler):
-    def fetch(self,id):
+    def fetch(self, id):
         url = "http://export.arxiv.org/api/query?id_list="+id+"&&start=0&&max_results=1";
         request = Request(url);
         try:
@@ -13,7 +13,7 @@ class arXiv(handler.Handler):
             #Turn string into xml.
             xmlData = xml.etree.ElementTree.fromstring(paperData);
             #Turn xml into dict
-            dictData = concatAttribs(xmlData);
+            dictData = self.concatAttribs(xmlData);
 
             return dictData
         except URLError as e:
@@ -22,7 +22,7 @@ class arXiv(handler.Handler):
     def authenticate(self, id):
         raise NotImplementedError
 
-    def concatAttribs(xmlTree):
+    def concatAttribs(self, xmlTree):
         xmlDict = {}
         try:
             startInd = xmlTree.tag.index("}")
@@ -33,12 +33,12 @@ class arXiv(handler.Handler):
             if children is not None and len(children) > 0:
                 childDict = {}
                 for child in xmlTree:
-                    childDict.update(concatAttribs(child))
+                    childDict.update(self.concatAttribs(child))
                 xmlDict[tag] = childDict
 
             return xmlDict
         except ValueError as e:
-            print "ValueError:",e
+            print("ValueError:", e)
             return {}
 
 """def main(*args):

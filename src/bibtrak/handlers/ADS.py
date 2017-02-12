@@ -2,7 +2,7 @@ import urllib.request
 import json
 import pprint
 
-import bibtrak import handler
+from bibtrak import handler
 
 class ADS(handler.Handler):
     def fetch(self,id):
@@ -12,7 +12,7 @@ class ADS(handler.Handler):
         #request access to the file
         url = (
             "https://api.adsabs.harvard.edu/v1/search/query?q=" +
-            bibcode + 
+            bibcode +
             "&fl=" +
             ",".join([
                 "author",

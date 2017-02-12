@@ -1,4 +1,4 @@
-from urllib2 import Request, urlopen, URLError
+from urllib.request import Request, urlopen, URLError
 import json
 
 from bibtrak import handler
