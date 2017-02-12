@@ -119,7 +119,6 @@ metadata = dict(
 
     package_dir ={"": "src"},
     packages    =["bibtrak", "bibtrak.handlers"],
-    namespace_packages = ["bibtrak.handlers"],
 #    packages=find_packages(exclude=['tests', 'tests.*']),
 
     install_requires=REQUIREMENTS["install"],
